@@ -1,0 +1,8 @@
+{
+  "name": "Artesanato Madeira Moldes",
+  "description": "Página de vendas para pacote de moldes de artesanato em madeira.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
