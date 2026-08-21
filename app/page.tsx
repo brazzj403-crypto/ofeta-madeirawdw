@@ -20,9 +20,11 @@ import {
   HelpCircle, 
   ChevronDown,
   UserCheck,
-  Award
+  Award,
+  Zap
 } from 'lucide-react';
 import Image from 'next/image';
+import { motion } from 'motion/react';
 import confetti from 'canvas-confetti';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 
@@ -221,18 +223,17 @@ export default function LandingPage() {
       {/* 0. TOP ANIMATED MARQUEE BANNER */}
       <div 
         id="top-marquee-banner"
-        className="w-full bg-[#B65212] border-b border-[#9E440C] text-white py-2.5 sm:py-3 overflow-hidden select-none relative z-20 shadow-sm"
+        className="w-full bg-[#FF8A00] border-b border-[#e67c00] text-white py-2.5 sm:py-3 overflow-hidden select-none relative z-20 shadow-md"
       >
         <div className="flex w-max animate-top-marquee whitespace-nowrap">
           {[...Array(8)].map((_, i) => (
             <div key={i} className="flex items-center gap-6 sm:gap-8 px-4 sm:px-6 shrink-0">
               <div className="flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-white">
                 <span>
-                  <span className="text-[#FFD166] font-black">1962</span> MARCENEIROS E ARTESÃOS JÁ APROVARAM OS MOLDES
+                  🔥 COMECE SEU HOBBY LUCRATIVO A PARTIR DE APENAS <span className="underline decoration-2 underline-offset-2 font-black">R$ 14,97</span>
                 </span>
-                <span className="text-[#FFD166] text-sm sm:text-base">⭐</span>
               </div>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FFD166]/50 shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-white/60 shrink-0" />
             </div>
           ))}
         </div>
@@ -243,22 +244,33 @@ export default function LandingPage() {
         <div className="absolute inset-0 opacity-[0.04] bg-[url('https://picsum.photos/seed/woodworking/1920/1080')] bg-cover bg-center mix-blend-multiply"></div>
         <div className="relative max-w-4xl mx-auto text-center z-10">
           
-          <h1 
+          <motion.h1 
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 'bold', fontStyle: 'normal' }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight mb-4 leading-tight text-[#1C1917]"
           >
-            +de 150 Moldes de Madeira <span className="text-[#FF8A00]">Prontos &amp; Lucrativos</span> para fazer no quintal de casa
-          </h1>
+            + de 150 Moldes de Madeira <span className="text-[#FF8A00]">Prontos e Lucrativos</span> para fazer no quintal de casa
+          </motion.h1>
 
-          <p 
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             style={{ color: '#43434d' }}
             className="text-base sm:text-lg md:text-xl mb-6 max-w-3xl mx-auto leading-relaxed"
           >
             São centenas de projetos prontos e fáceis de fazer para quem quer começar na marcenaria do zero sem perder tempo criando medidas e desenhos.
-          </p>
+          </motion.p>
 
-          {/* Imagem do Mockup Oficial do Pacote */}
-          <div className="relative w-full max-w-2xl mx-auto mb-8 flex items-center justify-center">
+          {/* Imagem do Mockup Oficial do Pacote com Efeito Suave */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
+            className="relative w-full max-w-2xl mx-auto mb-8 flex items-center justify-center"
+          >
             <Image
               src="https://i.imgur.com/PnRrQ1p.png"
               alt="Prévia do Pacote +150 Moldes de Madeira com Bônus"
@@ -269,27 +281,39 @@ export default function LandingPage() {
               unoptimized={true}
               referrerPolicy="no-referrer"
             />
-          </div>
+          </motion.div>
 
-          <a 
-            href="#oferta-completa" 
-            onClick={scrollToCompleteOffer}
-            className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#e67c00] text-white px-8 py-4 rounded-xl font-black text-lg transition-all transform hover:scale-105 hover:shadow-xl hover:shadow-[#FF8A00]/30 w-full sm:w-auto animate-pulse hover:animate-none"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
           >
-            QUERO OS +150 MOLDES
-            <ChevronRight className="w-6 h-6" />
-          </a>
+            <a 
+              href="#oferta-completa" 
+              onClick={scrollToCompleteOffer}
+              className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#e67c00] text-white px-8 py-4 rounded-xl font-black text-lg transition-all transform hover:scale-105 hover:shadow-xl hover:shadow-[#FF8A00]/30 w-full sm:w-auto animate-pulse hover:animate-none"
+            >
+              QUERO OS +150 MOLDES
+              <ChevronRight className="w-6 h-6" />
+            </a>
 
-          <p className="mt-3 text-xs sm:text-sm text-[#52525B] flex items-center justify-center gap-2 font-medium">
-            <Shield className="w-4 h-4 text-[#16A34A]" /> Compra 100% Segura • Acesso Imediato • Garantia de 7 Dias
-          </p>
+            <p className="mt-3 text-xs sm:text-sm text-[#52525B] flex items-center justify-center gap-2 font-medium">
+              <Shield className="w-4 h-4 text-[#16A34A]" /> Compra 100% Segura • Acesso Imediato • Garantia de 7 Dias
+            </p>
+          </motion.div>
         </div>
       </header>
 
       {/* 2. QUICK PRESENTATION SECTION */}
       <section className="py-8 bg-white border-b border-[#E8E1D5] px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto flex flex-wrap items-center justify-around gap-6 text-center">
-          <div className="flex items-center gap-3">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+            className="flex items-center gap-3"
+          >
             <div className="w-10 h-10 rounded-full bg-[#FF8A00]/10 flex items-center justify-center text-[#FF8A00]">
               <Hammer className="w-5 h-5" />
             </div>
@@ -297,9 +321,15 @@ export default function LandingPage() {
               <p className="font-bold text-[#1C1917] text-sm sm:text-base">+150 Projetos em PDF</p>
               <p className="text-xs text-[#52525B]">Prontos para imprimir e cortar</p>
             </div>
-          </div>
+          </motion.div>
           
-          <div className="flex items-center gap-3">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.1 }}
+            className="flex items-center gap-3"
+          >
             <div className="w-10 h-10 rounded-full bg-[#16A34A]/10 flex items-center justify-center text-[#16A34A]">
               <Smartphone className="w-5 h-5" />
             </div>
@@ -307,9 +337,15 @@ export default function LandingPage() {
               <p className="font-bold text-[#1C1917] text-sm sm:text-base">Celular, Tablet ou PC</p>
               <p className="text-xs text-[#52525B]">Acesse onde e quando quiser</p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="flex items-center gap-3">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.2 }}
+            className="flex items-center gap-3"
+          >
             <div className="w-10 h-10 rounded-full bg-[#FF8A00]/10 flex items-center justify-center text-[#FF8A00]">
               <Award className="w-5 h-5" />
             </div>
@@ -317,14 +353,24 @@ export default function LandingPage() {
               <p className="font-bold text-[#1C1917] text-sm sm:text-base">Peças de Alta Venda</p>
               <p className="text-xs text-[#52525B]">Modelos lucrativos testados</p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* 3. OFFERS SECTION (PROMOTED TO TOP) */}
+      {/* 3. OFFERS SECTION (PROMOTED TO TOP WITH SPECIAL ATTENTION-GRABBING PRICE EFFECTS) */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-[#FDFBF7] relative" id="ofertas">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-10"
+          >
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/30 text-[#D56816] text-xs font-black uppercase tracking-wider mb-2">
+              <Zap className="w-3.5 h-3.5 fill-[#D56816]" />
+              OFERTA ESPECIAL POR TEMPO LIMITADO
+            </div>
             <h2 
               style={{ fontFamily: 'Poppins, sans-serif', fontSize: '24px', fontWeight: 'bold' }} 
               className="text-[#1C1917]"
@@ -334,12 +380,16 @@ export default function LandingPage() {
             <p className="text-base sm:text-lg text-[#52525B] mt-1 border-0">
               Escolha a melhor opção para você e comece hoje mesmo.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-start">
             
             {/* BASIC PACKAGE CARD */}
-            <div 
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.5 }}
               style={{
                 border: '2px solid #D8D0C5',
                 borderRadius: '20px',
@@ -353,12 +403,18 @@ export default function LandingPage() {
                 <p className="text-xs sm:text-sm text-[#52525B]">Apenas os moldes essenciais, sem bônus.</p>
               </div>
 
-              {/* Price section - Centered */}
+              {/* Price section - Centered with Pop-in */}
               <div className="mb-6 text-center">
                 <p className="text-sm text-[#52525B]/70 line-through font-bold">De R$ {offer.basic.oldPrice}</p>
-                <div className="flex items-baseline justify-center gap-1 my-1">
+                <motion.div 
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", stiffness: 300, damping: 16, delay: 0.1 }}
+                  className="flex items-baseline justify-center gap-1 my-1"
+                >
                   <span className="text-3xl sm:text-4xl font-black text-[#df7827]">R$ {offer.basic.price}</span>
-                </div>
+                </motion.div>
                 <p className="text-xs text-[#52525B] font-semibold">pagamento único</p>
               </div>
 
@@ -401,16 +457,20 @@ export default function LandingPage() {
               >
                 QUERO O PACOTE BÁSICO
               </button>
-            </div>
+            </motion.div>
 
-            {/* COMPLETE PACKAGE CARD (HIGH CONVERTING & ULTRA CLEAN) */}
-            <div 
+            {/* COMPLETE PACKAGE CARD (HIGH CONVERTING, SPECIAL PRICE POP & SHIMMER) */}
+            <motion.div 
               id="oferta-completa"
+              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.55, delay: 0.1 }}
               style={{
                 border: '3px solid #D56816',
                 borderRadius: '20px',
                 background: '#FFFFFF',
-                boxShadow: '0 12px 30px rgba(213, 104, 22, 0.15)',
+                boxShadow: '0 12px 30px rgba(213, 104, 22, 0.18)',
                 scrollMarginTop: '70px'
               }}
               className="p-6 sm:p-8 relative flex flex-col h-full transform md:-translate-y-3 transition-all duration-300 scroll-mt-20"
@@ -418,35 +478,64 @@ export default function LandingPage() {
               {/* Badge */}
               <div 
                 style={{ backgroundColor: '#df7827' }}
-                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-1.5 whitespace-nowrap z-10 text-white font-black px-4 py-1 rounded-full text-xs sm:text-sm uppercase tracking-wider shadow-md"
+                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-1.5 whitespace-nowrap z-20 text-white font-black px-4 py-1.5 rounded-full text-xs sm:text-sm uppercase tracking-wider shadow-lg border-2 border-white animate-pulse"
               >
                 <Star className="w-3.5 h-3.5 fill-white" />
-                MAIS POPULAR
+                MAIS POPULAR E RECOMENDADO
               </div>
 
               <div className="mb-2 mt-3 text-center">
                 <h3 className="text-xl sm:text-2xl font-black text-[#1C1917]">{offer.complete.name}</h3>
               </div>
 
-              {/* Price section - Centered and High Impact */}
-              <div className="mb-4 text-center">
-                <p className="text-xs sm:text-sm text-[#52525B]/70 line-through font-bold">De R$ {offer.complete.oldPrice}</p>
-                <div className="flex items-baseline justify-center gap-1 my-1">
+              {/* Price section - Centered with Special Attention-Grabbing Reveal & Light Shimmer */}
+              <div className="mb-4 text-center relative py-1">
+                {/* Glow Aura Background Effect */}
+                <div className="absolute inset-0 max-w-[260px] mx-auto bg-gradient-to-r from-[#FF8A00]/15 via-[#FFD166]/25 to-[#FF8A00]/15 blur-xl rounded-full pointer-events-none animate-pulse-glow" />
+
+                {/* Strikethrough & Discount Tag */}
+                <div className="flex items-center justify-center gap-2 mb-1.5 relative z-10">
+                  <p className="text-xs sm:text-sm text-[#52525B]/70 line-through font-bold">
+                    De R$ {offer.complete.oldPrice}
+                  </p>
+                  <span className="bg-[#EF4444] text-white text-[11px] font-black uppercase px-2.5 py-0.5 rounded-full shadow-sm tracking-wide">
+                    86% OFF
+                  </span>
+                </div>
+
+                {/* Big Price with Spring Pop-In + Shimmer Light Beam Effect */}
+                <motion.div 
+                  initial={{ scale: 0.72, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", stiffness: 280, damping: 15, delay: 0.2 }}
+                  className="relative inline-flex items-baseline justify-center gap-1 my-1 px-5 py-1.5 rounded-2xl bg-gradient-to-b from-[#FFF6ED] to-[#FFF0E0] border-2 border-[#FF8A00]/40 shadow-[0_4px_16px_rgba(255,138,0,0.12)] overflow-hidden"
+                >
+                  {/* Passing Light Shimmer Sweep */}
+                  <div className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/80 to-transparent w-3/4 animate-shimmer pointer-events-none" />
+
                   <span 
                     style={{ 
                       color: '#df7827',
-                      fontSize: 'clamp(44px, 6vw, 64px)',
+                      fontSize: 'clamp(46px, 6.5vw, 66px)',
                       fontWeight: 'bold',
                       fontFamily: 'Poppins, sans-serif',
                       lineHeight: 1,
                       textDecoration: 'none'
                     }}
-                    className="tracking-tight"
+                    className="tracking-tight relative z-10 drop-shadow-sm"
                   >
                     R$ {offer.complete.price}
                   </span>
+                </motion.div>
+
+                <div className="flex items-center justify-center gap-1.5 mt-1 relative z-10">
+                  <span className="w-2 h-2 rounded-full bg-[#16A34A] animate-ping" />
+                  <p className="text-xs text-[#16A34A] font-extrabold uppercase tracking-wide">
+                    Preço Especial de Lançamento
+                  </p>
                 </div>
-                <p className="text-xs text-[#52525B] font-semibold">pagamento único</p>
+                <p className="text-xs text-[#52525B] font-semibold mt-0.5">pagamento único • acesso vitalício</p>
               </div>
 
               {/* Compact Green Card */}
@@ -459,7 +548,8 @@ export default function LandingPage() {
                 }}
                 className="p-3 mb-5 text-center"
               >
-                <p className="text-xs sm:text-sm font-black uppercase tracking-wide">
+                <p className="text-xs sm:text-sm font-black uppercase tracking-wide flex items-center justify-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5" />
                   POR APENAS R$ {offer.complete.diffPrice} A MAIS QUE O BÁSICO
                 </p>
                 <p className="text-[11px] sm:text-xs text-[#176B37]/90 mt-0.5 font-medium">
@@ -530,7 +620,7 @@ export default function LandingPage() {
               {/* CTA Button */}
               <a
                 href={offer.complete.checkoutUrl}
-                className="w-full py-4 sm:py-5 px-6 rounded-xl font-black text-center bg-[#FF8A00] hover:bg-[#e67c00] text-white text-base sm:text-lg transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(255,138,0,0.3)] flex flex-col items-center justify-center gap-0.5 animate-pulse hover:animate-none"
+                className="w-full py-4 sm:py-5 px-6 rounded-xl font-black text-center bg-[#FF8A00] hover:bg-[#e67c00] text-white text-base sm:text-lg transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(255,138,0,0.35)] flex flex-col items-center justify-center gap-0.5 animate-pulse hover:animate-none cursor-pointer"
               >
                 QUERO O PACOTE COMPLETO
               </a>
@@ -538,7 +628,7 @@ export default function LandingPage() {
               <p className="text-[11px] sm:text-xs text-center text-[#52525B] mt-2.5 font-medium">
                 Acesso imediato • Pagamento único • Garantia de 7 dias
               </p>
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -547,7 +637,13 @@ export default function LandingPage() {
       {/* 4. BONUSES SECTION */}
       <section className="py-14 sm:py-16 bg-[#F4EFE6] border-y border-[#E8E1D5] px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-8"
+          >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#16A34A] text-white text-xs sm:text-sm font-black mb-3 shadow-md">
               <Star className="w-4 h-4 fill-white" />
               ⭐ R$ 167,90 EM BÔNUS INCLUSOS
@@ -558,12 +654,16 @@ export default function LandingPage() {
             <p className="text-sm sm:text-base text-[#52525B]">
               Preparamos um material complementar exclusivo para acelerar seus resultados.
             </p>
-          </div>
+          </motion.div>
 
           <div className="space-y-6">
             {offer.bonuses.map((bonus, index) => (
-              <div 
+              <motion.div 
                 key={index} 
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
                 className="flex flex-col md:flex-row md:items-center justify-between p-5 sm:p-6 bg-white rounded-2xl border border-[#E8E1D5] hover:border-[#16A34A]/50 shadow-sm hover:shadow-md transition-all gap-5 sm:gap-6"
               >
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 flex-1 text-center sm:text-left">
@@ -602,12 +702,18 @@ export default function LandingPage() {
                     NO COMPLETO: R$ {bonus.todayPrice}
                   </span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
           {/* BONUS SUMMARY BOX */}
-          <div className="mt-8 bg-white border-2 border-[#16A34A] rounded-2xl p-6 text-center shadow-lg">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mt-8 bg-white border-2 border-[#16A34A] rounded-2xl p-6 text-center shadow-lg"
+          >
             <p className="text-xs sm:text-sm uppercase tracking-wider text-[#52525B] font-bold mb-1">Se adquiridos separadamente:</p>
             <p className="text-2xl sm:text-3xl font-black text-[#52525B]/70 line-through mb-3">R$ {offer.complete.totalBonusReference}</p>
             
@@ -619,13 +725,13 @@ export default function LandingPage() {
             <p className="text-[11px] sm:text-xs text-[#52525B] font-medium max-w-lg mx-auto">
               Ao escolher o Pacote Completo, você recebe <strong>R$ {offer.complete.totalBonusReference} em valor de referência dos bônus</strong> sem pagar nada a mais por eles.
             </p>
-          </div>
+          </motion.div>
           
           <div className="mt-8 text-center">
              <a 
               href="#oferta-completa" 
               onClick={scrollToCompleteOffer}
-              className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#e67c00] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 hover:shadow-xl hover:shadow-[#FF8A00]/30 w-full sm:w-auto animate-pulse hover:animate-none"
+              className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#e67c00] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 hover:shadow-xl hover:shadow-[#FF8A00]/30 w-full sm:w-auto animate-pulse hover:animate-none cursor-pointer"
             >
               QUERO TER ACESSO AOS BÔNUS
               <ChevronRight className="w-6 h-6" />
@@ -639,39 +745,71 @@ export default function LandingPage() {
 
       {/* 6. BENEFITS SECTION */}
       <section className="py-14 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <div className="text-center mb-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10"
+        >
           <h2 className="text-3xl md:text-4xl font-black mb-3 text-[#1C1917]">Por que esse pacote é para você?</h2>
           <p className="text-[#52525B] text-base sm:text-lg">Seja você um iniciante do zero ou quem já gosta de mexer com madeira.</p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-[#FF8A00]/40 hover:border-[#FF8A00] transition-colors">
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+            className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-[#FF8A00]/40 hover:border-[#FF8A00] transition-colors"
+          >
             <div className="w-12 h-12 bg-[#FF8A00]/10 rounded-xl flex items-center justify-center text-[#FF8A00] mb-4 border border-[#FF8A00]/20">
               <Hammer className="w-6 h-6" />
             </div>
             <h3 className="text-lg sm:text-xl font-bold mb-2 text-[#1C1917]">Projetos Prontos</h3>
             <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed">Chega de quebrar a cabeça calculando medidas. Imprima o molde, aplique na madeira e comece a cortar.</p>
-          </div>
-          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-[#16A34A]/40 hover:border-[#16A34A] transition-colors">
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.1 }}
+            className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-[#16A34A]/40 hover:border-[#16A34A] transition-colors"
+          >
             <div className="w-12 h-12 bg-[#16A34A]/10 rounded-xl flex items-center justify-center text-[#16A34A] mb-4 border border-[#16A34A]/20">
               <Star className="w-6 h-6" />
             </div>
             <h3 className="text-lg sm:text-xl font-bold mb-2 text-[#1C1917]">Peças Altamente Lucrativas</h3>
             <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed">Selecionamos os modelos que mais vendem no mercado de artesanato e decoração para você faturar no seu tempo livre.</p>
-          </div>
-          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-[#FF8A00]/40 hover:border-[#FF8A00] transition-colors">
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.2 }}
+            className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-[#FF8A00]/40 hover:border-[#FF8A00] transition-colors"
+          >
             <div className="w-12 h-12 bg-[#FF8A00]/10 rounded-xl flex items-center justify-center text-[#FF8A00] mb-4 border border-[#FF8A00]/20">
               <Check className="w-6 h-6" />
             </div>
             <h3 className="text-lg sm:text-xl font-bold mb-2 text-[#1C1917]">Passo a Passo Simples</h3>
             <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed">Qualquer pessoa pode fazer. Projetos desenhados com clareza para não deixar dúvidas na hora da execução.</p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* 7. EXPERT SECTION (NILTON LUIZ) */}
       <section className="py-14 sm:py-16 bg-[#F4EFE6] border-b border-[#E8E1D5] px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="max-w-2xl mx-auto flex flex-col items-center text-center"
+        >
           <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-white shadow-xl overflow-hidden mb-5 shrink-0 bg-stone-200">
             <Image
               src="https://i.ibb.co/CZNfZ5Q/2804bc77-69d2-48f8-ac43-12a1ec4f167b.png"
@@ -692,12 +830,18 @@ export default function LandingPage() {
           <p className="text-sm sm:text-base text-[#52525B] leading-relaxed max-w-xl">
             Artesão e marceneiro apaixonado pela transformação da madeira. O pacote de moldes foi criado e organizado para que qualquer pessoa consiga executar peças bonitas, resistentes e altamente rentáveis, mesmo com poucas ferramentas e trabalhando no quintal de casa.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* 7. GUARANTEE SECTION */}
       <section className="py-14 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-        <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-[#E8E1D5] flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55 }}
+          className="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-[#E8E1D5] flex flex-col md:flex-row items-center gap-8 relative overflow-hidden"
+        >
           <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 shrink-0 relative flex items-center justify-center">
             <Image
               src="https://i.imgur.com/xBoJNw7.png"
@@ -717,25 +861,38 @@ export default function LandingPage() {
             <a
               href="#oferta-completa"
               onClick={scrollToCompleteOffer}
-              className="inline-flex items-center gap-2 text-[#16A34A] font-bold text-sm hover:underline"
+              className="inline-flex items-center gap-2 text-[#16A34A] font-bold text-sm hover:underline cursor-pointer"
             >
               Começar com garantia de risco zero <ArrowRight className="w-4 h-4" />
             </a>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* 8. FAQ SECTION */}
       <section className="py-12 sm:py-16 bg-[#F4EFE6] border-y border-[#E8E1D5] px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-8"
+          >
             <h2 className="text-2xl sm:text-3xl font-black text-[#1C1917]">Perguntas Frequentes</h2>
             <p className="text-xs sm:text-sm text-[#52525B] mt-1">Tire todas as suas dúvidas antes de começar.</p>
-          </div>
+          </motion.div>
 
           <div className="space-y-3">
             {faqs.map((faq, idx) => (
-              <div key={idx} className="bg-white rounded-xl border border-[#E8E1D5] overflow-hidden">
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: idx * 0.05 }}
+                className="bg-white rounded-xl border border-[#E8E1D5] overflow-hidden"
+              >
                 <button
                   type="button"
                   onClick={() => toggleFaq(idx)}
@@ -752,21 +909,27 @@ export default function LandingPage() {
                     {faq.a}
                   </div>
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 9. FINAL CTA SECTION (WITH REQUESTED STYLES) */}
+      {/* 9. FINAL CTA SECTION (WITH REQUESTED STYLES & ENTRANCE ANIMATION) */}
       <section className="py-16 bg-[#FDFBF7] text-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="relative max-w-3xl mx-auto z-10">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55 }}
+          className="relative max-w-3xl mx-auto z-10"
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#1C1917] mb-6 leading-tight">
             <span className="text-[#FF8A00]">MAIS DE 150 MOLDES</span> + 5 BÔNUS POR R$ 27,00
           </h2>
           <a
             href={offer.complete.checkoutUrl}
-            className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#e67c00] text-white px-8 sm:px-12 py-5 rounded-2xl font-black text-lg sm:text-xl transition-all transform hover:scale-105 shadow-xl shadow-[#FF8A00]/25 mb-4 animate-pulse hover:animate-none"
+            className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#e67c00] text-white px-8 sm:px-12 py-5 rounded-2xl font-black text-lg sm:text-xl transition-all transform hover:scale-105 shadow-xl shadow-[#FF8A00]/25 mb-4 animate-pulse hover:animate-none cursor-pointer"
           >
             🔥 SIM, QUERO O PACOTE COMPLETO
           </a>
@@ -779,7 +942,7 @@ export default function LandingPage() {
               Prefiro somente o Pacote Básico por R$ 14,97
             </button>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* 10. FOOTER WITH SUPPORT CONTACT INFO */}
@@ -911,7 +1074,7 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* Styles for top marquee animation */}
+      {/* Styles for top marquee and price effects */}
       <style jsx>{`
         @keyframes topMarquee {
           0% {
@@ -923,6 +1086,30 @@ export default function LandingPage() {
         }
         .animate-top-marquee {
           animation: topMarquee 26s linear infinite;
+        }
+        @keyframes shimmerPass {
+          0% {
+            transform: translateX(-150%);
+          }
+          40%, 100% {
+            transform: translateX(250%);
+          }
+        }
+        .animate-shimmer {
+          animation: shimmerPass 3.5s ease-in-out infinite;
+        }
+        @keyframes pulseGlow {
+          0%, 100% {
+            opacity: 0.35;
+            transform: scale(0.98);
+          }
+          50% {
+            opacity: 0.8;
+            transform: scale(1.05);
+          }
+        }
+        .animate-pulse-glow {
+          animation: pulseGlow 2.8s ease-in-out infinite;
         }
         @media (max-width: 640px) {
           .animate-top-marquee {
