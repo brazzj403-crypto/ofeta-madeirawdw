@@ -264,23 +264,25 @@ export default function LandingPage() {
             São centenas de projetos prontos e fáceis de fazer para quem quer começar na marcenaria do zero sem perder tempo criando medidas e desenhos.
           </motion.p>
 
-          {/* Imagem do Mockup Oficial do Pacote com Efeito Suave */}
+          {/* Imagem do Mockup Oficial do Pacote com Efeito Suave e Bordas Arredondadas */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
             className="relative w-full max-w-2xl mx-auto mb-8 flex items-center justify-center"
           >
-            <Image
-              src="https://i.imgur.com/PnRrQ1p.png"
-              alt="Prévia do Pacote +150 Moldes de Madeira com Bônus"
-              width={1200}
-              height={675}
-              className="w-full h-auto max-h-[460px] object-contain drop-shadow-xl"
-              priority
-              unoptimized={true}
-              referrerPolicy="no-referrer"
-            />
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white/50 p-1.5 sm:p-2 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_20px_50px_rgba(255,138,0,0.2)]">
+              <Image
+                src="https://i.imgur.com/PmB7xRO.png"
+                alt="Prévia do Pacote +150 Moldes de Madeira com Bônus"
+                width={1200}
+                height={675}
+                className="w-full h-auto max-h-[460px] object-cover rounded-xl sm:rounded-2xl"
+                priority
+                unoptimized={true}
+                referrerPolicy="no-referrer"
+              />
+            </div>
           </motion.div>
 
           <motion.div
@@ -357,7 +359,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 3. OFFERS SECTION (PROMOTED TO TOP WITH SPECIAL ATTENTION-GRABBING PRICE EFFECTS) */}
+      {/* 3. TESTIMONIALS INFINITE CAROUSEL */}
+      <TestimonialsCarousel />
+
+      {/* 4. OFFERS SECTION */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-[#FDFBF7] relative" id="ofertas">
         <div className="max-w-5xl mx-auto">
           <motion.div 
@@ -739,9 +744,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-      {/* 5. TESTIMONIALS INFINITE CAROUSEL (RIGHT AFTER BONUSES) */}
-      <TestimonialsCarousel />
 
       {/* 6. BENEFITS SECTION */}
       <section className="py-14 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">

@@ -13,15 +13,22 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: '+150 Moldes de Artesanato em Madeira',
   description: 'Página de vendas para pacote de moldes de artesanato em madeira.',
+  icons: {
+    icon: 'https://i.imgur.com/BGHEp1E.png',
+    shortcut: 'https://i.imgur.com/BGHEp1E.png',
+    apple: 'https://i.imgur.com/BGHEp1E.png',
+  },
   openGraph: {
     title: '+150 Moldes de Artesanato em Madeira',
     description: 'Página de vendas para pacote de moldes de artesanato em madeira.',
+    images: ['https://i.imgur.com/BGHEp1E.png'],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: '+150 Moldes de Artesanato em Madeira',
     description: 'Página de vendas para pacote de moldes de artesanato em madeira.',
+    images: ['https://i.imgur.com/BGHEp1E.png'],
   },
 };
 
@@ -29,6 +36,11 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
+        {/* Favicon / Ícone da Guia do Navegador */}
+        <link rel="icon" href="https://i.imgur.com/BGHEp1E.png" type="image/png" />
+        <link rel="shortcut icon" href="https://i.imgur.com/BGHEp1E.png" type="image/png" />
+        <link rel="apple-touch-icon" href="https://i.imgur.com/BGHEp1E.png" />
+
         {/* Meta Pixel Code */}
         <Script
           id="meta-pixel"
