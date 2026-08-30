@@ -41,7 +41,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <link rel="shortcut icon" href="https://i.imgur.com/BGHEp1E.png" type="image/png" />
         <link rel="apple-touch-icon" href="https://i.imgur.com/BGHEp1E.png" />
 
-        {/* Meta Pixel Code */}
+        {/* Meta Pixel Code & Tracking */}
         <Script
           id="meta-pixel"
           strategy="afterInteractive"
@@ -57,6 +57,88 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
               'https://connect.facebook.net/en_US/fbevents.js');
               fbq('init', '1765022624917316');
               fbq('track', 'PageView');
+              fbq('track', 'ViewContent', {
+                content_name: '+150 Moldes de Artesanato em Madeira',
+                content_category: 'Woodworking Plans & Craft Courses',
+                currency: 'BRL',
+                value: 27.00
+              });
+            `,
+          }}
+        />
+
+        {/* Script de Repasse Automático de UTMs e Disparo de InitiateCheckout */}
+        <Script
+          id="cakto-utm-and-tracking"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                function setupTrackingAndUtms() {
+                  try {
+                    var currentUrlParams = new URLSearchParams(window.location.search);
+                    
+                    // Buscar todos os links da página
+                    var links = document.querySelectorAll('a[href*="pay.cakto.com.br"], a[href*="cakto.com.br"]');
+                    
+                    links.forEach(function(link) {
+                      var originalHref = link.getAttribute('href');
+                      if (!originalHref) return;
+
+                      // 1. Repasse de parâmetros e UTMs
+                      if (currentUrlParams.toString()) {
+                        try {
+                          var targetUrl = new URL(originalHref, window.location.origin);
+                          
+                          // Anexa todas as UTMs e parâmetros existentes na LP preservando os do destino
+                          currentUrlParams.forEach(function(value, key) {
+                            if (!targetUrl.searchParams.has(key)) {
+                              targetUrl.searchParams.set(key, value);
+                            }
+                          });
+
+                          link.setAttribute('href', targetUrl.toString());
+                        } catch(e) {
+                          // Fallback para URLs relativas ou com sintaxe especial
+                          var separator = originalHref.indexOf('?') !== -1 ? '&' : '?';
+                          link.setAttribute('href', originalHref + separator + currentUrlParams.toString());
+                        }
+                      }
+
+                      // 2. Disparo de InitiateCheckout no clique (evitando múltiplos listeners)
+                      if (!link.dataset.trackingAttached) {
+                        link.dataset.trackingAttached = 'true';
+                        link.addEventListener('click', function() {
+                          if (typeof window.fbq === 'function') {
+                            window.fbq('track', 'InitiateCheckout', {
+                              content_name: '+150 Moldes de Madeira',
+                              currency: 'BRL',
+                              destination_url: link.getAttribute('href')
+                            });
+                          }
+                        });
+                      }
+                    });
+                  } catch (err) {
+                    console.error('Erro no tracking Cakto/UTM:', err);
+                  }
+                }
+
+                // Executa assim que o DOM estiver pronto
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', setupTrackingAndUtms);
+                } else {
+                  setupTrackingAndUtms();
+                }
+
+                // Observa possíveis novos modais ou botões renderizados dinamicamente
+                if (typeof MutationObserver !== 'undefined') {
+                  var observer = new MutationObserver(function() {
+                    setupTrackingAndUtms();
+                  });
+                  observer.observe(document.body, { childList: true, subtree: true });
+                }
+              })();
             `,
           }}
         />

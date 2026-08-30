@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Check, 
   ChevronRight, 
@@ -103,6 +103,35 @@ const offer = {
 export default function LandingPage() {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showStickyCard, setShowStickyCard] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 220) {
+        setShowStickyCard(true);
+      } else {
+        setShowStickyCard(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const scrollToOffersSection = (e?: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
+    if (e) e.preventDefault();
+    const target = document.getElementById('ofertas');
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
 
   const scrollToCompleteOffer = (e?: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
     if (e) e.preventDefault();
@@ -219,65 +248,46 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] font-sans text-[#1C1917] selection:bg-[#FF8A00]/30">
-      
-      {/* 0. TOP ANIMATED MARQUEE BANNER */}
-      <div 
-        id="top-marquee-banner"
-        className="w-full bg-[#FF8A00] border-b border-[#e67c00] text-white py-2.5 sm:py-3 overflow-hidden select-none relative z-20 shadow-md"
-      >
-        <div className="flex w-max animate-top-marquee whitespace-nowrap">
-          {[...Array(8)].map((_, i) => (
-            <div key={i} className="flex items-center gap-6 sm:gap-8 px-4 sm:px-6 shrink-0">
-              <div className="flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-white">
-                <span>
-                  🔥 COMECE SEU HOBBY LUCRATIVO A PARTIR DE APENAS <span className="underline decoration-2 underline-offset-2 font-black">R$ 14,97</span>
-                </span>
-              </div>
-              <span className="w-1.5 h-1.5 rounded-full bg-white/60 shrink-0" />
-            </div>
-          ))}
-        </div>
-      </div>
 
-      {/* 1. HERO SECTION */}
-      <header className="relative overflow-hidden bg-[#FDFBF7] text-[#1C1917] pt-8 sm:pt-12 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 border-b border-[#E8E1D5]">
-        <div className="absolute inset-0 opacity-[0.04] bg-[url('https://picsum.photos/seed/woodworking/1920/1080')] bg-cover bg-center mix-blend-multiply"></div>
+      {/* 1. HERO SECTION (HARMONIOUS, HIGH-CONVERTING & PROPORTIONAL) */}
+      <header className="relative overflow-hidden bg-[#FDFBF7] text-[#1C1917] pt-8 pb-10 sm:pt-12 sm:pb-14 md:pt-14 md:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#E8E1D5]">
+        <div className="absolute inset-0 opacity-[0.04] bg-[url('https://picsum.photos/seed/woodworking/1920/1080')] bg-cover bg-center mix-blend-multiply pointer-events-none"></div>
         <div className="relative max-w-4xl mx-auto text-center z-10">
           
           <motion.h1 
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 'bold', fontStyle: 'normal' }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight mb-4 leading-tight text-[#1C1917]"
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight mb-3 sm:mb-4 leading-tight text-[#1C1917]"
           >
-            + de 150 Moldes de Madeira <span className="text-[#FF8A00]">Prontos e Lucrativos</span> para fazer no quintal de casa
+            Transforme o Quintal da Sua Casa em um <span className="text-[#FF8A00]">Negócio Lucrativo</span> de Artesanato em Madeira
           </motion.h1>
 
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+            transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
             style={{ color: '#43434d' }}
-            className="text-base sm:text-lg md:text-xl mb-6 max-w-3xl mx-auto leading-relaxed"
+            className="text-sm sm:text-base md:text-lg lg:text-xl mb-5 sm:mb-6 max-w-3xl mx-auto leading-relaxed"
           >
-            São centenas de projetos prontos e fáceis de fazer para quem quer começar na marcenaria do zero sem perder tempo criando medidas e desenhos.
+            +150 projetos prontos e fáceis de seguir. O passo a passo ideal para iniciantes criarem peças lucrativas com pouco espaço e materiais simples.
           </motion.p>
 
           {/* Imagem do Mockup Oficial do Pacote com Efeito Suave e Bordas Arredondadas */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.94 }}
+            initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
-            className="relative w-full max-w-2xl mx-auto mb-8 flex items-center justify-center"
+            transition={{ duration: 0.5, delay: 0.18, ease: "easeOut" }}
+            className="relative w-full max-w-2xl mx-auto mb-6 sm:mb-8 flex items-center justify-center"
           >
-            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white/50 p-1.5 sm:p-2 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_20px_50px_rgba(255,138,0,0.2)]">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border-2 sm:border-4 border-white bg-white/50 p-1 sm:p-2 backdrop-blur-sm transition-all duration-300 hover:shadow-[0_20px_50px_rgba(255,138,0,0.2)]">
               <Image
                 src="https://i.imgur.com/PmB7xRO.png"
                 alt="Prévia do Pacote +150 Moldes de Madeira com Bônus"
                 width={1200}
                 height={675}
-                className="w-full h-auto max-h-[460px] object-cover rounded-xl sm:rounded-2xl"
+                className="w-full h-auto max-h-[280px] sm:max-h-[380px] md:max-h-[460px] object-cover rounded-xl sm:rounded-2xl"
                 priority
                 unoptimized={true}
                 referrerPolicy="no-referrer"
@@ -286,21 +296,22 @@ export default function LandingPage() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.5, delay: 0.25, ease: "easeOut" }}
           >
             <a 
               href="#oferta-completa" 
               onClick={scrollToCompleteOffer}
-              className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#e67c00] text-white px-8 py-4 rounded-xl font-black text-lg transition-all transform hover:scale-105 hover:shadow-xl hover:shadow-[#FF8A00]/30 w-full sm:w-auto animate-pulse hover:animate-none"
+              className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#e67c00] text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-black text-base sm:text-lg uppercase tracking-wider transition-all transform hover:scale-105 hover:shadow-xl hover:shadow-[#FF8A00]/30 w-full sm:w-auto shadow-lg shadow-[#FF8A00]/25"
             >
               QUERO OS +150 MOLDES
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
 
-            <p className="mt-3 text-xs sm:text-sm text-[#52525B] flex items-center justify-center gap-2 font-medium">
-              <Shield className="w-4 h-4 text-[#16A34A]" /> Compra 100% Segura • Acesso Imediato • Garantia de 7 Dias
+            <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-[#52525B] flex items-center justify-center gap-1.5 sm:gap-2 font-medium">
+              <Shield className="w-4 h-4 text-[#16A34A] shrink-0" /> 
+              <span>Compra 100% Segura • Acesso Imediato • Garantia de 7 Dias</span>
             </p>
           </motion.div>
         </div>
@@ -464,7 +475,7 @@ export default function LandingPage() {
               </button>
             </motion.div>
 
-            {/* COMPLETE PACKAGE CARD (HIGH CONVERTING, SPECIAL PRICE POP & SHIMMER) */}
+            {/* COMPLETE PACKAGE CARD (CLEAN, MODERN & MINIMALIST HIGH CONVERTING) */}
             <motion.div 
               id="oferta-completa"
               initial={{ opacity: 0, y: 30, scale: 0.97 }}
@@ -472,98 +483,63 @@ export default function LandingPage() {
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.55, delay: 0.1 }}
               style={{
-                border: '3px solid #D56816',
-                borderRadius: '20px',
+                borderRadius: '24px',
                 background: '#FFFFFF',
-                boxShadow: '0 12px 30px rgba(213, 104, 22, 0.18)',
+                boxShadow: '0 10px 30px rgba(213, 104, 22, 0.12)',
                 scrollMarginTop: '70px'
               }}
-              className="p-6 sm:p-8 relative flex flex-col h-full transform md:-translate-y-3 transition-all duration-300 scroll-mt-20"
+              className="p-6 sm:p-8 relative flex flex-col h-full border-2 border-[#FF8A00] transform md:-translate-y-3 transition-all duration-300 scroll-mt-20"
             >
-              {/* Badge */}
+              {/* 1. Top Badge de Destaque */}
               <div 
-                style={{ backgroundColor: '#df7827' }}
-                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-1.5 whitespace-nowrap z-20 text-white font-black px-4 py-1.5 rounded-full text-xs sm:text-sm uppercase tracking-wider shadow-lg border-2 border-white animate-pulse"
+                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-1.5 whitespace-nowrap z-20 text-white font-extrabold px-4 sm:px-5 py-1.5 rounded-full text-xs uppercase tracking-wider shadow-md bg-gradient-to-r from-[#FF8A00] to-[#E65100] border-2 border-white"
               >
                 <Star className="w-3.5 h-3.5 fill-white" />
                 MAIS POPULAR E RECOMENDADO
               </div>
 
-              <div className="mb-2 mt-3 text-center">
+              <div className="mb-1 mt-3 text-center">
                 <h3 className="text-xl sm:text-2xl font-black text-[#1C1917]">{offer.complete.name}</h3>
               </div>
 
-              {/* Price section - Centered with Special Attention-Grabbing Reveal & Light Shimmer */}
-              <div className="mb-4 text-center relative py-1">
-                {/* Glow Aura Background Effect */}
-                <div className="absolute inset-0 max-w-[260px] mx-auto bg-gradient-to-r from-[#FF8A00]/15 via-[#FFD166]/25 to-[#FF8A00]/15 blur-xl rounded-full pointer-events-none animate-pulse-glow" />
-
-                {/* Strikethrough & Discount Tag */}
-                <div className="flex items-center justify-center gap-2 mb-1.5 relative z-10">
-                  <p className="text-xs sm:text-sm text-[#52525B]/70 line-through font-bold">
-                    De R$ {offer.complete.oldPrice}
-                  </p>
-                  <span className="bg-[#EF4444] text-white text-[11px] font-black uppercase px-2.5 py-0.5 rounded-full shadow-sm tracking-wide">
+              {/* 2. Hierarquia de Preço (Clean, Minimalista e Respirável) */}
+              <div className="mb-5 text-center relative pt-2">
+                {/* Linha de Ancoragem + Tag de Desconto Sutil */}
+                <div className="flex items-center justify-center gap-2 mb-1.5">
+                  <span className="text-xs sm:text-sm text-stone-500 font-medium">
+                    De <span className="line-through text-stone-400">R$ {offer.complete.oldPrice}</span> por apenas
+                  </span>
+                  <span className="bg-emerald-50 text-emerald-700 border border-emerald-200/90 text-[11px] font-bold uppercase px-2 py-0.5 rounded-full tracking-tight">
                     86% OFF
                   </span>
                 </div>
 
-                {/* Big Price with Spring Pop-In + Shimmer Light Beam Effect */}
-                <motion.div 
-                  initial={{ scale: 0.72, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ type: "spring", stiffness: 280, damping: 15, delay: 0.2 }}
-                  className="relative inline-flex items-baseline justify-center gap-1 my-1 px-5 py-1.5 rounded-2xl bg-gradient-to-b from-[#FFF6ED] to-[#FFF0E0] border-2 border-[#FF8A00]/40 shadow-[0_4px_16px_rgba(255,138,0,0.12)] overflow-hidden"
-                >
-                  {/* Passing Light Shimmer Sweep */}
-                  <div className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/80 to-transparent w-3/4 animate-shimmer pointer-events-none" />
-
+                {/* Preço em Destaque Respirando no Fundo Claro */}
+                <div className="my-1">
                   <span 
-                    style={{ 
-                      color: '#df7827',
-                      fontSize: 'clamp(46px, 6.5vw, 66px)',
-                      fontWeight: 'bold',
-                      fontFamily: 'Poppins, sans-serif',
-                      lineHeight: 1,
-                      textDecoration: 'none'
-                    }}
-                    className="tracking-tight relative z-10 drop-shadow-sm"
+                    style={{ fontFamily: 'Poppins, sans-serif' }}
+                    className="text-5xl sm:text-6xl font-black tracking-tight text-[#D56816] inline-block"
                   >
                     R$ {offer.complete.price}
                   </span>
-                </motion.div>
-
-                <div className="flex items-center justify-center gap-1.5 mt-1 relative z-10">
-                  <span className="w-2 h-2 rounded-full bg-[#16A34A] animate-ping" />
-                  <p className="text-xs text-[#16A34A] font-extrabold uppercase tracking-wide">
-                    Preço Especial de Lançamento
-                  </p>
                 </div>
-                <p className="text-xs text-[#52525B] font-semibold mt-0.5">pagamento único • acesso vitalício</p>
+
+                {/* Subtexto Discreto */}
+                <p className="text-xs sm:text-sm text-stone-500 font-normal mt-1">
+                  Pagamento único • Acesso vitalício
+                </p>
               </div>
 
-              {/* Compact Green Card */}
-              <div 
-                style={{
-                  background: '#EDF8EF',
-                  border: '1px solid #A7D8AF',
-                  color: '#176B37',
-                  borderRadius: '14px'
-                }}
-                className="p-3 mb-5 text-center"
-              >
-                <p className="text-xs sm:text-sm font-black uppercase tracking-wide flex items-center justify-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  POR APENAS R$ {offer.complete.diffPrice} A MAIS QUE O BÁSICO
-                </p>
-                <p className="text-[11px] sm:text-xs text-[#176B37]/90 mt-0.5 font-medium">
-                  Você desbloqueia os +150 moldes e todos os 5 bônus.
-                </p>
+              {/* 3. Callout Moderno e Sutil de Comparação (Upgrade de R$ 12,03) */}
+              <div className="p-3.5 mb-6 rounded-xl bg-amber-50/70 border border-amber-200/80 text-stone-700 text-xs sm:text-sm leading-relaxed flex items-center justify-center gap-2 text-center">
+                <span>💡</span>
+                <span>
+                  Por apenas <strong className="text-stone-900 font-bold">R$ {offer.complete.diffPrice} a mais</strong> que o plano básico, você leva o acesso completo + todos os 5 bônus.
+                </span>
               </div>
 
               {/* Clean Checklist without clutter */}
-              <ul className="space-y-2 mb-6 flex-1 text-xs sm:text-sm text-[#1C1917]">
+              <ul className="space-y-2.5 mb-6 flex-1 text-xs sm:text-sm text-[#1C1917]">
                 <li className="flex items-start gap-2.5">
                   <Check className="w-4 h-4 text-[#16A34A] shrink-0 mt-0.5 font-bold" />
                   <span className="font-black text-[#1C1917]">+150 Moldes de Artesanato em Madeira</span>
@@ -1075,6 +1051,59 @@ export default function LandingPage() {
           </div>
         </div>
       )}
+
+      {/* 9. STICKY BOTTOM OFFER MINI CARD (FLOATING PILL / GLASSMORPHISM) */}
+      <div 
+        id="sticky-bottom-offer-card"
+        className={`fixed bottom-3 sm:bottom-5 left-0 right-0 z-40 px-3 sm:px-4 pointer-events-none transition-all duration-500 ease-out transform ${
+          showStickyCard ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'
+        }`}
+      >
+        <div className="max-w-2xl mx-auto pointer-events-auto">
+          <div className="relative overflow-hidden bg-[#1C1917]/95 text-white backdrop-blur-md rounded-2xl sm:rounded-full px-3.5 py-2.5 sm:px-6 sm:py-3 shadow-2xl border border-[#FF8A00]/40 flex items-center justify-between gap-3 sm:gap-4 ring-1 ring-white/10 hover:border-[#FF8A00]/70 transition-all duration-300">
+            
+            {/* Subtle Amber Glow Background Effect */}
+            <div className="absolute -top-10 -left-10 w-24 h-24 bg-[#FF8A00]/20 rounded-full blur-xl pointer-events-none" />
+            <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-[#FF8A00]/20 rounded-full blur-xl pointer-events-none" />
+
+            {/* Left Info: Icon & Text */}
+            <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-full bg-gradient-to-br from-[#FF8A00] to-[#E65100] text-white flex items-center justify-center shrink-0 shadow-md">
+                <Hammer className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              </div>
+              
+              <div className="flex flex-col leading-tight min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#FFD166] flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-[#FFD166]" />
+                    Oferta Especial
+                  </span>
+                </div>
+                <div className="text-xs sm:text-sm font-semibold truncate text-[#FDFBF7]">
+                  +150 Moldes Prontos <span className="hidden sm:inline">por apenas</span>{' '}
+                  <span className="text-[#FF8A00] font-black text-sm sm:text-base">
+                    R$ {offer.basic.price}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Action: CTA Button with Smooth Scroll */}
+            <button
+              onClick={scrollToOffersSection}
+              id="sticky-card-cta-btn"
+              className="group relative shrink-0 overflow-hidden bg-gradient-to-r from-[#FF8A00] via-[#FFA133] to-[#FF8A00] bg-[length:200%_auto] hover:bg-right text-white font-black text-xs sm:text-sm uppercase tracking-wider px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-full shadow-lg shadow-[#FF8A00]/25 hover:shadow-[#FF8A00]/40 transition-all duration-300 transform active:scale-95 flex items-center gap-1 sm:gap-1.5 cursor-pointer"
+            >
+              <span className="relative z-10 font-black">Garantir Oferta</span>
+              <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 relative z-10 transition-transform group-hover:translate-x-0.5 font-bold" />
+              
+              {/* Shimmer animation pass */}
+              <div className="absolute inset-0 bg-white/20 -translate-x-full animate-shimmer pointer-events-none" />
+            </button>
+
+          </div>
+        </div>
+      </div>
 
       {/* Styles for top marquee and price effects */}
       <style jsx>{`
