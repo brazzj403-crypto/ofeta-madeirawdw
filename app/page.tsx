@@ -27,6 +27,7 @@ import Image from 'next/image';
 import { motion } from 'motion/react';
 import confetti from 'canvas-confetti';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
+import RecentPurchasesToast from '@/components/RecentPurchasesToast';
 
 const offer = {
   productName: "+150 Moldes de Artesanato em Madeira",
@@ -696,7 +697,8 @@ export default function LandingPage() {
                       src={bonus.image}
                       alt={bonus.name}
                       fill
-                      unoptimized={true}
+                      loading="lazy"
+                      sizes="(max-width: 640px) 144px, 176px"
                       className="object-contain p-2 drop-shadow-md hover:scale-105 transition-transform duration-300"
                       referrerPolicy="no-referrer"
                     />
@@ -1142,6 +1144,9 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
+
+      {/* 12. FLOATING SOCIAL PROOF TOAST (RECENT PURCHASES) */}
+      <RecentPurchasesToast />
 
       {/* Styles for top marquee and price effects */}
       <style jsx>{`
