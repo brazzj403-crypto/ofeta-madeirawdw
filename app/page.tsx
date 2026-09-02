@@ -48,9 +48,9 @@ const offer = {
   },
 
   completePromo: {
-    price: "19,90",
+    price: "17,90",
     oldPrice: "27,00",
-    diffPrice: "4,93",
+    diffPrice: "2,93",
     checkoutUrl: "https://pay.cakto.com.br/gs3jxgt"
   },
 
@@ -314,10 +314,12 @@ export default function LandingPage() {
             <a 
               href="#oferta-completa" 
               onClick={scrollToCompleteOffer}
-              className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#e67c00] text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-black text-base sm:text-lg uppercase tracking-wider transition-all transform hover:scale-105 hover:shadow-xl hover:shadow-[#FF8A00]/30 w-full sm:w-auto shadow-lg shadow-[#FF8A00]/25"
+              className="group relative overflow-hidden inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF8A00] via-[#FFA033] to-[#E65100] text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-black text-base sm:text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 active:scale-[0.98] shadow-[0_8px_24px_rgba(255,138,0,0.38)] hover:shadow-[0_12px_32px_rgba(255,138,0,0.52)] w-full sm:w-auto cursor-pointer ring-1 ring-white/30 ring-inset"
             >
-              QUERO OS +150 MOLDES
-              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+              <span className="relative z-10 font-black">QUERO OS +150 MOLDES</span>
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 transition-transform duration-200 group-hover:translate-x-1" />
+              {/* Feixe de luz contínuo sem piscar nem alterar a opacidade */}
+              <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-btn-sheen pointer-events-none" />
             </a>
 
             <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-[#52525B] flex items-center justify-center gap-1.5 sm:gap-2 font-medium">
@@ -454,7 +456,12 @@ export default function LandingPage() {
                 >
                   <span className="text-3xl sm:text-4xl font-black text-[#df7827]">R$ {offer.basic.price}</span>
                 </motion.div>
-                <p className="text-xs text-[#52525B] font-semibold">pagamento único</p>
+                <p className="text-xs md:text-sm text-neutral-600 font-medium mt-0.5">
+                  ou até 3x de R$ 5,81 no cartão
+                </p>
+                <p className="text-[11px] text-neutral-400 mt-0.5">
+                  pagamento único à vista • acesso vitalício
+                </p>
               </div>
 
               {/* Clean Checklist */}
@@ -526,9 +533,9 @@ export default function LandingPage() {
               </div>
 
               {/* 2. Hierarquia de Preço (Clean, Minimalista e Respirável) */}
-              <div className="mb-5 text-center relative pt-2">
+              <div className="mb-4 text-center relative pt-2">
                 {/* Linha de Ancoragem + Tag de Desconto Sutil */}
-                <div className="flex items-center justify-center gap-2 mb-1.5">
+                <div className="flex items-center justify-center gap-2 mb-1">
                   <span className="text-xs sm:text-sm text-stone-500 font-medium">
                     De <span className="line-through text-stone-400">R$ {offer.complete.oldPrice}</span> por apenas
                   </span>
@@ -538,7 +545,7 @@ export default function LandingPage() {
                 </div>
 
                 {/* Preço em Destaque Respirando no Fundo Claro */}
-                <div className="my-1">
+                <div className="my-0.5">
                   <span 
                     style={{ fontFamily: 'Poppins, sans-serif' }}
                     className="text-5xl sm:text-6xl font-black tracking-tight text-[#D56816] inline-block"
@@ -547,14 +554,21 @@ export default function LandingPage() {
                   </span>
                 </div>
 
-                {/* Subtexto Discreto */}
-                <p className="text-xs sm:text-sm text-stone-500 font-normal mt-1">
-                  Pagamento único • Acesso vitalício
+                {/* Linha 1: Parcelamento no Cartão */}
+                <div>
+                  <span className="text-xs md:text-sm font-semibold text-amber-700 bg-amber-50 inline-block px-2.5 py-0.5 rounded-full border border-amber-200/60 my-1">
+                    ou apenas 6x de R$ 5,34 no cartão
+                  </span>
+                </div>
+
+                {/* Linha 2: Subtexto Discreto */}
+                <p className="text-[11px] text-neutral-400">
+                  pagamento único à vista • acesso vitalício
                 </p>
               </div>
 
               {/* 3. Callout Moderno e Sutil de Comparação (Upgrade de R$ 12,03) */}
-              <div className="p-3.5 mb-6 rounded-xl bg-amber-50/70 border border-amber-200/80 text-stone-700 text-xs sm:text-sm leading-relaxed flex items-center justify-center gap-2 text-center">
+              <div className="p-3 mb-5 rounded-xl bg-amber-50/70 border border-amber-200/80 text-stone-700 text-xs sm:text-sm leading-relaxed flex items-center justify-center gap-2 text-center">
                 <span>💡</span>
                 <span>
                   Por apenas <strong className="text-stone-900 font-bold">R$ {offer.complete.diffPrice} a mais</strong> que o plano básico, você leva o acesso completo + todos os 5 bônus.
@@ -624,9 +638,14 @@ export default function LandingPage() {
               {/* CTA Button */}
               <a
                 href={offer.complete.checkoutUrl}
-                className="w-full py-4 sm:py-5 px-6 rounded-xl font-black text-center bg-[#FF8A00] hover:bg-[#e67c00] text-white text-base sm:text-lg transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(255,138,0,0.35)] flex flex-col items-center justify-center gap-0.5 animate-pulse hover:animate-none cursor-pointer"
+                className="group relative overflow-hidden w-full py-4 sm:py-5 px-6 rounded-2xl font-black text-center bg-gradient-to-r from-[#FF8A00] via-[#FFA033] to-[#E65100] text-white text-base sm:text-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-[0_10px_28px_rgba(255,138,0,0.42)] hover:shadow-[0_14px_34px_rgba(255,138,0,0.55)] flex items-center justify-center gap-2 cursor-pointer ring-1 ring-white/30 ring-inset"
               >
-                QUERO O PACOTE COMPLETO
+                <span className="relative z-10 font-black tracking-wide">
+                  QUERO O PACOTE COMPLETO
+                </span>
+                <ChevronRight className="w-5 h-5 relative z-10 transition-transform duration-200 group-hover:translate-x-1" />
+                {/* Feixe de luz reflexivo elegante sem piscar nem alterar a opacidade do botão */}
+                <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/35 to-transparent -translate-x-full animate-btn-sheen pointer-events-none" />
               </a>
 
               <p className="text-[11px] sm:text-xs text-center text-[#52525B] mt-2.5 font-medium">
@@ -930,9 +949,15 @@ export default function LandingPage() {
           </h2>
           <a
             href={offer.complete.checkoutUrl}
-            className="inline-flex items-center justify-center gap-2 bg-[#FF8A00] hover:bg-[#e67c00] text-white px-8 sm:px-12 py-5 rounded-2xl font-black text-lg sm:text-xl transition-all transform hover:scale-105 shadow-xl shadow-[#FF8A00]/25 mb-4 animate-pulse hover:animate-none cursor-pointer"
+            className="group relative overflow-hidden inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#FF8A00] via-[#FFA033] to-[#E65100] text-white px-8 sm:px-12 py-5 rounded-2xl font-black text-lg sm:text-xl transition-all duration-300 transform hover:scale-[1.03] active:scale-[0.98] shadow-[0_12px_32px_rgba(255,138,0,0.45)] hover:shadow-[0_16px_38px_rgba(255,138,0,0.58)] mb-4 cursor-pointer ring-1 ring-white/30 ring-inset"
           >
-            🔥 SIM, QUERO O PACOTE COMPLETO
+            <span className="relative z-10 flex items-center gap-2 font-black">
+              <span>🔥</span>
+              <span>SIM, QUERO O PACOTE COMPLETO</span>
+            </span>
+            <ChevronRight className="w-6 h-6 relative z-10 transition-transform duration-200 group-hover:translate-x-1" />
+            {/* Feixe de luz reflexivo sem piscar nem alterar a opacidade do botão */}
+            <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/35 to-transparent -translate-x-full animate-btn-sheen pointer-events-none" />
           </a>
           <div>
             <button 
@@ -975,102 +1000,92 @@ export default function LandingPage() {
         </div>
       </footer>
 
-      {/* 11. UPGRADE POPUP MODAL (CLEAN, GAMIFIED CELEBRATION & PROMINENT CENTERED PRICE) */}
+      {/* 11. UPGRADE POPUP MODAL (CLEAN, COMPACT, HIGH-CONVERTING & MODERN) */}
       {showUpgradeModal && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto"
-          style={{ background: 'rgba(0,0,0,0.7)' }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto bg-black/60 backdrop-blur-xs"
           onClick={() => setShowUpgradeModal(false)}
         >
           <div 
-            className="relative w-[calc(100%-24px)] sm:w-full max-w-[460px] bg-white border-2 border-[#16A34A] rounded-3xl shadow-2xl p-5 sm:p-7 my-auto text-center animate-in fade-in zoom-in-95 duration-200"
+            className="relative w-full max-w-[390px] bg-white border border-neutral-200 shadow-2xl rounded-2xl p-4 sm:p-5 my-auto text-center animate-in fade-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               type="button"
               onClick={() => setShowUpgradeModal(false)}
-              className="absolute top-3.5 right-3.5 p-2 rounded-full text-[#52525B] hover:text-[#1C1917] hover:bg-stone-100 transition-colors"
+              className="absolute top-3 right-3 p-1.5 rounded-full text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 transition-colors cursor-pointer"
               aria-label="Fechar"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
 
-            {/* Gamified Celebration Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#16A34A]/10 border border-[#16A34A]/30 text-[#16A34A] text-xs font-black uppercase tracking-wider mb-2">
-              <Sparkles className="w-3.5 h-3.5" />
-              🎉 PARABÉNS! PRESENTE DESBLOQUEADO
+            {/* 1. Badge Superior Sutil e Amigável */}
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[11px] font-bold uppercase tracking-wider mb-2.5">
+              <span>💡</span>
+              <span>Oportunidade de Upgrade</span>
             </div>
 
-            {/* Headline */}
-            <h3 className="text-xl sm:text-2xl font-black text-[#1C1917] leading-tight mb-1">
-              Leve o Pacote Completo
+            {/* 2. Headline & Subtexto */}
+            <h3 className="text-base sm:text-lg font-bold text-neutral-800 leading-snug">
+              Leve o Pacote Completo por apenas +R$ {offer.completePromo.diffPrice}
             </h3>
             
-            <p className="text-xs sm:text-sm text-[#52525B]">
-              Liberamos uma oportunidade única antes de você finalizar.
+            <p className="text-xs text-neutral-500 mt-1">
+              Adicione todos os 5 bônus exclusivos por uma pequena diferença única.
             </p>
 
-            {/* Super Prominent Centered Pricing Box */}
-            <div className="bg-[#F8F6F0] border-2 border-[#16A34A] rounded-2xl p-4 sm:p-5 my-4 text-center shadow-sm">
-              <span className="inline-block text-xs sm:text-sm text-[#52525B]/70 font-semibold line-through">
-                De R$ {offer.completePromo.oldPrice} por apenas:
+            {/* 3. Bloco de Preço e Ancoragem Matemática (Clean & Respirável) */}
+            <div className="my-3.5 text-center">
+              <span className="text-xs text-neutral-400 line-through">
+                De R$ {offer.completePromo.oldPrice} por
               </span>
               
-              <div className="my-1.5">
-                <span 
-                  style={{
-                    color: '#16A34A',
-                    fontSize: 'clamp(44px, 10vw, 60px)',
-                    fontWeight: 900,
-                    lineHeight: 1
-                  }}
-                  className="tracking-tight block font-sans"
-                >
-                  R$ {offer.completePromo.price}
-                </span>
+              <div 
+                style={{ fontFamily: 'Poppins, sans-serif' }}
+                className="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight my-0.5"
+              >
+                R$ {offer.completePromo.price}
               </div>
               
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#16A34A]/10 text-[#16A34A] text-xs font-black mt-0.5">
-                <Sparkles className="w-3.5 h-3.5" />
-                Apenas +R$ {offer.completePromo.diffPrice} a mais que o Básico!
+              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-[11px] font-semibold mt-1">
+                <span>Apenas R$ {offer.completePromo.diffPrice} a mais que o básico (R$ {offer.basic.price})</span>
               </div>
             </div>
 
-            {/* Clean 3-Item List */}
-            <div className="bg-stone-50 rounded-xl p-3.5 text-left mb-5 border border-stone-200">
-              <ul className="space-y-2 text-xs sm:text-sm text-[#1C1917] font-semibold">
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#16A34A] shrink-0 font-bold" />
-                  <span>+150 Moldes de Artesanato em Madeira</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#16A34A] shrink-0 font-bold" />
-                  <span>Todos os 5 Bônus Exclusivos inclusos</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-[#16A34A] shrink-0 font-bold" />
-                  <span>Acesso vitalício e imediato no celular ou PC</span>
-                </li>
-              </ul>
+            {/* 4. Benefícios Resumidos (3 Linhas Compactas) */}
+            <ul className="space-y-1.5 text-left text-xs text-neutral-700 font-medium my-3.5 px-2">
+              <li className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[2.5]" />
+                <span>+150 Moldes de Madeira em PDF</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[2.5]" />
+                <span>Todos os 5 Bônus Exclusivos inclusos</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[2.5]" />
+                <span>Acesso vitalício e imediato</span>
+              </li>
+            </ul>
+
+            {/* 5. Botões de Ação e Recusa Clara */}
+            <div className="space-y-1.5">
+              <a
+                href={offer.completePromo.checkoutUrl}
+                className="w-full py-3.5 px-4 rounded-xl font-bold text-center bg-[#FF8A00] hover:bg-[#e67c00] text-white text-sm sm:text-base transition-all transform hover:scale-[1.02] shadow-lg shadow-[#FF8A00]/25 flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <span>SIM, QUERO O COMPLETO POR R$ {offer.completePromo.price}</span>
+                <ChevronRight className="w-4 h-4" />
+              </a>
+
+              <a
+                href={offer.basic.checkoutUrl}
+                className="text-neutral-600 hover:text-neutral-900 underline text-xs font-medium py-2 text-center block transition-colors cursor-pointer"
+              >
+                Não, obrigado. Quero apenas o Básico por R$ {offer.basic.price}
+              </a>
             </div>
-
-            {/* Main Action Button */}
-            <a
-              href={offer.completePromo.checkoutUrl}
-              className="w-full py-4 px-5 rounded-xl font-black text-center bg-[#16A34A] hover:bg-[#15803d] text-white text-base sm:text-lg transition-all transform hover:scale-102 shadow-lg shadow-[#16A34A]/30 flex items-center justify-center gap-2 mb-3 cursor-pointer"
-            >
-              SIM! QUERO O COMPLETO POR R$ {offer.completePromo.price}
-              <ChevronRight className="w-5 h-5" />
-            </a>
-
-            {/* Secondary Link */}
-            <a
-              href={offer.basic.checkoutUrl}
-              className="inline-block text-[#52525B] hover:text-[#1C1917] text-xs font-medium underline underline-offset-4 transition-colors"
-            >
-              Não, quero continuar com o Básico por R$ {offer.basic.price}
-            </a>
           </div>
         </div>
       )}
@@ -1155,6 +1170,17 @@ export default function LandingPage() {
         }
         .animate-top-marquee {
           animation: topMarquee 26s linear infinite;
+        }
+        @keyframes btnSheen {
+          0% {
+            transform: translateX(-160%) skewX(-20deg);
+          }
+          35%, 100% {
+            transform: translateX(260%) skewX(-20deg);
+          }
+        }
+        .animate-btn-sheen {
+          animation: btnSheen 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
         @keyframes shimmerPass {
           0% {
