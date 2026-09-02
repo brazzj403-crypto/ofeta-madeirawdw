@@ -252,16 +252,27 @@ export default function LandingPage() {
       {/* 1. HERO SECTION (HARMONIOUS, HIGH-CONVERTING & PROPORTIONAL) */}
       <header className="relative overflow-hidden bg-[#FDFBF7] text-[#1C1917] pt-8 pb-10 sm:pt-12 sm:pb-14 md:pt-14 md:pb-16 px-4 sm:px-6 lg:px-8 border-b border-[#E8E1D5]">
         <div className="absolute inset-0 opacity-[0.04] bg-[url('https://picsum.photos/seed/woodworking/1920/1080')] bg-cover bg-center mix-blend-multiply pointer-events-none"></div>
-        <div className="relative max-w-4xl mx-auto text-center z-10">
+        <div className="relative max-w-4xl mx-auto text-center z-10 px-2 sm:px-4">
           
           <motion.h1 
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
             style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 'bold', fontStyle: 'normal' }}
-            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight mb-3 sm:mb-4 leading-tight text-[#1C1917]"
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] tracking-tight mb-3 sm:mb-4 leading-tight text-[#1C1917]"
           >
-            Transforme o Quintal da Sua Casa em um <span className="text-[#FF8A00]">Negócio Lucrativo</span> de Artesanato em Madeira
+            Transforme <span className="text-[#78350F] font-black">sobras de madeira</span> em{' '}
+            <span className="relative inline-block text-[#D96B00] font-black">
+              dinheiro todo mês no seu bolso
+              {/* Traço sutil estilo hand-drawn underline */}
+              <svg 
+                className="absolute -bottom-1 left-0 w-full h-2 text-[#FF8A00] opacity-80 overflow-visible pointer-events-none" 
+                viewBox="0 0 100 8" 
+                preserveAspectRatio="none"
+              >
+                <path d="M1 5.5 Q 35 1.5, 70 6 T 99 3.5" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" />
+              </svg>
+            </span>
           </motion.h1>
 
           <motion.p 
@@ -381,19 +392,31 @@ export default function LandingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-10"
+            className="text-center mb-9 sm:mb-12"
           >
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#FF8A00]/10 border border-[#FF8A00]/30 text-[#D56816] text-xs font-black uppercase tracking-wider mb-2">
-              <Zap className="w-3.5 h-3.5 fill-[#D56816]" />
-              OFERTA ESPECIAL POR TEMPO LIMITADO
+            {/* 1. Badge Superior Moderno com Ponto Pulsante de Urgência */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 text-[11px] sm:text-xs font-black uppercase tracking-wider mb-3 shadow-xs">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-600"></span>
+              </span>
+              <Zap className="w-3.5 h-3.5 fill-amber-600 text-amber-600 shrink-0" />
+              <span>Oferta Especial Por Tempo Limitado</span>
             </div>
+
+            {/* 2. Título da Seção (H2) Alinhado com Destaque em 'Agora' */}
             <h2 
-              style={{ fontFamily: 'Poppins, sans-serif', fontSize: '24px', fontWeight: 'bold' }} 
-              className="text-[#1C1917]"
+              style={{ fontFamily: 'Poppins, sans-serif' }} 
+              className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-neutral-900 tracking-tight leading-tight flex items-center justify-center gap-2 flex-wrap"
             >
-              🔥 Garanta seu acesso agora
+              <span>🔥 Garanta seu acesso</span>{' '}
+              <span className="text-[#FF8A00] font-black underline decoration-[#FF8A00]/30 decoration-4 underline-offset-4">
+                agora
+              </span>
             </h2>
-            <p className="text-base sm:text-lg text-[#52525B] mt-1 border-0">
+
+            {/* 3. Subtítulo Limpo e Equilibrado */}
+            <p className="text-neutral-600 text-sm md:text-base max-w-md mx-auto mt-2 leading-relaxed">
               Escolha a melhor opção para você e comece hoje mesmo.
             </p>
           </motion.div>
@@ -1107,6 +1130,21 @@ export default function LandingPage() {
 
       {/* Styles for top marquee and price effects */}
       <style jsx>{`
+        @keyframes textShimmer {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        .animate-text-shimmer {
+          background-size: 200% auto;
+          animation: textShimmer 4.5s ease-in-out infinite;
+        }
         @keyframes topMarquee {
           0% {
             transform: translateX(0%);

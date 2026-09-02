@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Image from 'next/image';
+import { Star, ChevronDown, CheckCircle2 } from 'lucide-react';
 
 interface TestimonialItem {
   image: string;
@@ -41,21 +42,36 @@ export default function TestimonialsCarousel() {
 
   return (
     <section className="py-14 sm:py-18 bg-[#FDFBF7] border-y border-[#E8E1D5] overflow-hidden relative">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-8 sm:mb-10">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#16A34A]/10 border border-[#16A34A]/30 text-[#16A34A] text-xs font-black uppercase tracking-wider mb-2.5">
-          ⭐ DEPOIMENTOS REAIS
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-7 sm:mb-9">
+        {/* 1. Badge Superior Moderno & Contrastante */}
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-300/80 text-emerald-800 text-[11px] sm:text-xs font-black uppercase tracking-wider mb-2.5 shadow-sm">
+          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+          <span className="font-extrabold">Depoimentos Reais & Verificados</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1C1917] tracking-tight">
-          Veja quem já colocou a mão na madeira 🪵
+
+        {/* 2. Novo Título Principal (H2) */}
+        <h2 
+          style={{ fontFamily: 'Poppins, sans-serif' }}
+          className="text-2xl sm:text-3xl md:text-4xl font-black text-[#1C1917] tracking-tight leading-tight"
+        >
+          Veja quem já colocou em prática e <span className="text-[#FF8A00] font-black underline decoration-[#FF8A00]/40 decoration-4 underline-offset-4">faturou</span>
         </h2>
-        <p className="text-sm sm:text-base text-[#52525B] mt-1.5 max-w-xl mx-auto">
-          Resultados e mensagens de quem já teve acesso aos moldes.
+
+        {/* 3. Subtítulo Convincente com Foco em Resultado Financeiro */}
+        <p className="text-xs sm:text-base text-[#52525B] mt-2 max-w-xl mx-auto leading-relaxed">
+          Pessoas comuns que começaram do zero no quintal de casa e já estão vendendo suas primeiras peças de madeira com lucro rápido.
         </p>
 
-        {/* Mobile Swipe Hint */}
-        <p className="text-xs text-[#52525B]/80 font-semibold mt-3 flex items-center justify-center gap-1 sm:hidden">
-          <span>←</span> Arraste para ver mais <span>→</span>
-        </p>
+        {/* 4. Seta Harmônica com Micro-Animação Flutuante */}
+        <div className="mt-3.5 flex flex-col items-center justify-center gap-1">
+          <div className="w-7 h-7 rounded-full bg-amber-50 border border-amber-200/90 flex items-center justify-center text-[#FF8A00] shadow-sm animate-bounce">
+            <ChevronDown className="w-4 h-4 text-[#FF8A00] stroke-[2.5]" />
+          </div>
+          {/* Mobile Swipe Hint */}
+          <p className="text-[11px] sm:text-xs text-[#52525B]/80 font-medium sm:hidden">
+            Arraste para o lado para ver todos os prints
+          </p>
+        </div>
       </div>
 
       {/* Carousel Container with Side Gradient Masks */}
