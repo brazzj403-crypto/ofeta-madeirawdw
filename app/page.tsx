@@ -36,7 +36,7 @@ const offer = {
     name: "Moldes Essenciais",
     oldPrice: "29,90",
     price: "14,97",
-    checkoutUrl: "https://pay.cakto.com.br/v9pph7i"
+    checkoutUrl: "https://pay.cakto.com.br/v9pph7i_1049777?src=basico1497"
   },
 
   complete: {
@@ -45,14 +45,14 @@ const offer = {
     oldPrice: "197,80",
     price: "27,00",
     diffPrice: "12,03",
-    checkoutUrl: "https://pay.cakto.com.br/cghwdxf_1048886"
+    checkoutUrl: "https://pay.cakto.com.br/cghwdxf_1048886?src=completo27"
   },
 
   completePromo: {
     price: "17,90",
     oldPrice: "27,00",
     diffPrice: "2,93",
-    checkoutUrl: "https://pay.cakto.com.br/gs3jxgt"
+    checkoutUrl: "https://pay.cakto.com.br/gs3jxgt_1049778?src=popup1790"
   },
 
   bonuses: [
@@ -1024,13 +1024,13 @@ export default function LandingPage() {
 
             {/* 1. Badge Superior Sutil e Amigável */}
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[11px] font-bold uppercase tracking-wider mb-2.5">
-              <span>💡</span>
-              <span>Oportunidade de Upgrade</span>
+              <span>⚡</span>
+              <span>OFERTA ESPECIAL</span>
             </div>
 
             {/* 2. Headline & Subtexto */}
             <h3 className="text-base sm:text-lg font-bold text-neutral-800 leading-snug">
-              Leve o Pacote Completo por apenas +R$ {offer.completePromo.diffPrice}
+              Leve o Pacote Completo por apenas R$ 2,93 a mais
             </h3>
             
             <p className="text-xs text-neutral-500 mt-1">
@@ -1038,7 +1038,7 @@ export default function LandingPage() {
             </p>
 
             {/* 3. Bloco de Preço e Ancoragem Matemática (Clean & Respirável) */}
-            <div className="my-3.5 text-center">
+            <div className="my-3 text-center">
               <span className="text-xs text-neutral-400 line-through">
                 De R$ {offer.completePromo.oldPrice} por
               </span>
@@ -1050,24 +1050,32 @@ export default function LandingPage() {
                 R$ {offer.completePromo.price}
               </div>
               
-              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-[11px] font-semibold mt-1">
+              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-[11px] font-semibold mt-0.5">
                 <span>Apenas R$ {offer.completePromo.diffPrice} a mais que o básico (R$ {offer.basic.price})</span>
               </div>
             </div>
 
-            {/* 4. Benefícios Resumidos (3 Linhas Compactas) */}
+            {/* 4. Nova Lista de Benefícios */}
             <ul className="space-y-1.5 text-left text-xs text-neutral-700 font-medium my-3.5 px-2">
               <li className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[2.5]" />
-                <span>+150 Moldes de Madeira em PDF</span>
+                <span>Todos os +150 Moldes do Plano Básico</span>
               </li>
               <li className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[2.5]" />
-                <span>Todos os 5 Bônus Exclusivos inclusos</span>
+                <span>+ 5 Bônus Exclusivos</span>
               </li>
               <li className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[2.5]" />
-                <span>Acesso vitalício e imediato</span>
+                <span>Materiais extras para ajudar você a criar e vender</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[2.5]" />
+                <span>Acesso imediato</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-600 shrink-0 stroke-[2.5]" />
+                <span>Bônus: Aprenda a vender suas peças</span>
               </li>
             </ul>
 
